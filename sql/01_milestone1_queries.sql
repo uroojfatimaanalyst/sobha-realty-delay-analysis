@@ -26,24 +26,25 @@ SUM(CASE WHEN ProcedureNameEn IN
 FROM 'sobha_cleaned.csv' 
 WHERE ProcedurePartyTypeNameEn = 'Buyer';
 
---Question 3: Q3. How many delayed transactions happened in each year from 2018 to 2023? 
+--Question 3: How many delayed transactions happened in each year from 2018 to 2023? 
 --Why this query: groups transactions by year to see whether delays are getting better or worse over time, not just what the 
 --current overall rate is. The Regis column contained two different date formats in the raw file, so TRY_STRPTIME with two 
 --format patterns was used to read it correctly.
-    YEAR( 
-        COALESCE( 
-            TRY_STRPTIME(Regis, '%d/%m/%Y'), 
-            TRY_STRPTIME(Regis, '%d-%b-%y') 
-        ) 
-    ) AS transaction_year, 
-    COUNT(*) AS total_transactions, 
+SELECT
+    YEAR(
+        COALESCE(
+            TRY_STRPTIME(Regis, '%d/%m/%Y'),
+            TRY_STRPTIME(Regis, '%d-%b-%y')
+        )
+    ) AS transaction_year,
+    COUNT(*) AS total_transactions,
     SUM(CASE WHEN ProcedureNameEn IN 
         ('Complete Delayed Sell', 'Delayed Sell', 'Delayed Mortgage', 
          'Grant on Delayed Sell', 'Delayed Sell Lease to Own Registration') 
-        THEN 1 ELSE 0 END) AS delayed_transactions 
-FROM 'sobha_cleaned.csv' 
-WHERE ProcedurePartyTypeNameEn = 'Buyer' 
-GROUP BY 1 
+        THEN 1 ELSE 0 END) AS delayed_transactions
+FROM 'sobha_cleaned.csv'
+WHERE ProcedurePartyTypeNameEn = 'Buyer'
+GROUP BY 1
 ORDER BY 1;
 
 -- Question 4: Which projects have the highest number of delayed transactions? 
