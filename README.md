@@ -38,18 +38,23 @@ What are the 10 most expensive delayed transactions?
 
 ## Repository Structure
 sobha-realty-delay-analysis/
-├── README.md
+├── Data/
+│   └── README_data_source.md
+├── Docs/
+│   ├── Sobha_MP2_Final_Report.pdf
+│   └── Sobha_mp1_capstone_project.pdf
 ├── sql/
 │   ├── 01_milestone1_queries.sql
 │   └── 02_milestone2_queries.sql
-└── visuals/
-    ├── chart 1.png
-    ├── chart 2.png
-    ├── chart 3.png
-    ├── chart 4.png
-    ├── chart 5.png
-    ├── chart 6.png
-    └── chart 7.png
+├── visuals/
+│   ├── Chart 1.png
+│   ├── Chart 2.png
+│   ├── Chart 3.png
+│   ├── Chart 4.png
+│   ├── Chart 5.png
+│   ├── Chart 6.png
+│   └── Chart 7.png
+└── README.md
 
 # Key Findings
 1. Approximately **27% of transactions were delayed**.
